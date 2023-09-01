@@ -1,0 +1,52 @@
+name: ERP Postman Automation API Test 
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Step 1 Check version Newman and Node
+        run: |
+          newman --version
+          node --version
+      # Runs a single command using the runners shell
+      - name: Step 2 Install Newman-Reporter-HtmlExtra
+        run: sudo npm install -g newman-reporter-htmlextra
+
+      # Runs a single command using the runners shell
+      - name: Step 3 Execute collection
+        run: newman run ./AutomacaoPartners.postman_collection.json -e ./Partners.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./docs/index.html
+
+      # Runs a set of commands using the runners shell
+      - name: Step 4 Archive Production artifacts
+        if: ${{ always() }} # This ensures the step runs even if the previous steps fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: ./docs/index.html
+
+      - name: Step 5 Deploy do Report.html
+        if: ${{ always() }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./docs
