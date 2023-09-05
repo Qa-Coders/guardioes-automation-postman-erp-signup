@@ -3,6 +3,8 @@
 
 ### Pasta Relatorios ###
 results/
+docs/
+newman/
 
 ### Android ###
 # Gradle files
