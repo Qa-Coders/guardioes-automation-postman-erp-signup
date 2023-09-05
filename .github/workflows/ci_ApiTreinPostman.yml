@@ -34,7 +34,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Step 3 Execute collection
-        run: newman run ./AutomacaoPartners.postman_collection.json -e ./Partners.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./docs/index.html
+        run: newman run ./AutomacaoCadastroLoginAcesso_Login.postman_collection.json -e ./CadastroLoginAcesso_Login.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./docs/index.html
 
       # Runs a set of commands using the runners shell
       - name: Step 4 Archive Production artifacts
