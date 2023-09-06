@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "dd82ce20-d94d-41ff-94d6-dfb9e0b6e982",
+		"name": "AutomacaoSignup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11126906",
+		"_collection_link": "https://kadarphoenix.postman.co/workspace/Hackton-Qa.Academy~57582428-5ace-4026-8e5e-4b3e788d9d24/collection/11126906-dd82ce20-d94d-41ff-94d6-dfb9e0b6e982?action=share&source=collection_link&creator=11126906"
+	},
+	"item": [
+		{
+			"name": "Caminho Feliz",
+			"item": [
+				{
+					"name": "Criar login de acesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"Token\",pm.variables.replaceIn(JSON.parse(responseBody).token));",
+									"pm.environment.set(\"idUsuario\",pm.variables.replaceIn(JSON.parse(responseBody).user._id));",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Token is True\", function () {",
+									"       pm.expect(JSON.parse(responseBody).token).is.exist;",
+									"});",
+									"pm.test(\"check FullName is true\", function () {",
+									"        pm.expect(pm.variables.get(\"FullName\")).to.eql(JSON.parse(responseBody).user.fullName);",
+									"});",
+									"pm.test(\"check Email is true\", function () {",
+									"        pm.expect(pm.variables.get(\"Mail\")).to.eql(JSON.parse(responseBody).user.mail);",
+									"});",
+									"pm.test(\"check Password is true\", function () {",
+									"        pm.expect(pm.variables.get(\"Password\")).is.exist",
+									"});",
+									"pm.test(\"check accessProfile\", function () {",
+									"        pm.expect(\"ADMIN\").to.eql(JSON.parse(responseBody).user.accessProfile);",
+									"});",
+									"pm.test(\"check idCompany\", function () {",
+									"        pm.expect(\"12345679009\").to.eql(JSON.parse(responseBody).user.idCompany);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function gerarSenha() {\r",
+									"  const caracteres = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%\";\r",
+									"  const comprimentoMinimo = 8;\r",
+									"  const comprimentoMaximo = 12;\r",
+									"  \r",
+									"  let senhaArray = [];\r",
+									"\r",
+									"  // Garante pelo menos um caractere maiúsculo, minúsculo, número e especial\r",
+									"  senhaArray.push(caracteres[Math.floor(Math.random() * 26)]); // Caractere maiúsculo\r",
+									"  senhaArray.push(caracteres[26 + Math.floor(Math.random() * 26)]); // Caractere minúsculo\r",
+									"  senhaArray.push(caracteres[52 + Math.floor(Math.random() * 10)]); // Número\r",
+									"  senhaArray.push(caracteres[62 + Math.floor(Math.random() * 4)]); // Caractere especial\r",
+									"\r",
+									"  const comprimentoRestante = Math.max(comprimentoMinimo - senhaArray.length, comprimentoMaximo - senhaArray.length);\r",
+									"\r",
+									"  for (let i = 0; i < comprimentoRestante; i++) {\r",
+									"    senhaArray.push(caracteres[Math.floor(Math.random() * caracteres.length)]);\r",
+									"  }\r",
+									"\r",
+									"  return shuffleString(senhaArray.join(\"\"));\r",
+									"}\r",
+									"\r",
+									"function shuffleString(string) {\r",
+									"  return string.split(\"\").sort(() => Math.random() - 0.5).join(\"\");\r",
+									"}\r",
+									"\r",
+									"function firstName(){\r",
+									"\r",
+									"    var firstName = [\"Maria\",\"João\",\"Ana\",\"Pedro\",\"Carla\",\"Lucas\",\"Mariana\",\"Paulo\",\"Camila\",\"Rafael\",\"Juliana\",\"Gustavo\",\"Larissa\",\"Fernando\",\"Amanda\",\"Diego\",\"Isabela\",\"Ricardo\",\"Natália\",\"Henrique\",\"Lívia\",\"Roberto\",\"Sofia\",\"Eduardo\",\"Vitória\",\"Fábio\",\"Mariana\",\"André\",\"Letícia\",\"Rodrigo\",\"Lara\",\"Guilherme\",\"Bianca\",\"Miguel\",\"Alice\",\"Leonardo\",\"Laura\",\"Daniel\",\"Beatriz\",\"Felipe\",\"Luiza\",\"Arthur\",\"Helena\",\"Gabriel\",\"Valentina\",\"Bernardo\",\"Sophia\",\"Vitor\",\"Clara\",\"Francisco\",\"Yasmin\",\"Enzo\",\"Isabel\",\"Isabella\",\"Lorenzo\",\"Joana\",\"Samuel\",\"Melissa\",\"Otávio\",\"Ana\",\"Breno\",\"Cecília\",\"Benjamin\",\"Luana\",\"Mariane\",\"Davi\",\"Nathália\",\"Raul\",\"Isadora\",\"Marcelo\",\"Luna\",\"Nicolas\",\"Laís\",\"Augusto\",\"Stella\",\"Ruan\",\"Gabriela\",\"Luciano\",\"Evelyn\",\"Thiago\",\"Lorena\",\"Vinícius\",\"Catarina\",\"Murilo\",\"Pietra\",\"Tomás\",\"Carolina\",\"Caio\",\"Manuela\",\"Emanuelly\",\"Lavinia\",\"Lucca\",\"Mirella\",\"Kevin\",\"Rebeca\",\"Anthony\",\"Júlia\"];\r",
+									"    var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									"    return randomItem;\r",
+									"}\r",
+									"\r",
+									"function lastName(){\r",
+									"\r",
+									"    var lastName = [\"Silva\",\"Santos\",\"Oliveira\",\"Souza\",\"Rodrigues\",\"Almeida\",\"Costa\",\"Pereira\",\"Carvalho\",\"Ferreira\",\"Gomes\",\"Martins\",\"Rocha\",\"Ribeiro\",\"Alves\",\"Lima\",\"Sousa\",\"Fernandes\",\"Pinto\",\"Cunha\",\"Mendes\",\"Barbosa\",\"Saraiva\",\"Machado\",\"Cardoso\",\"Nogueira\",\"Ramos\",\"Coelho\",\"Araújo\",\"Castro\",\"Fonseca\",\"Rocha\",\"Moreira\",\"Figueiredo\",\"Gonçalves\",\"Monteiro\",\"Marques\",\"Peixoto\",\"Morais\",\"Lopes\",\"Vieira\",\"Tavares\",\"Correia\",\"Neves\",\"Nunes\",\"Cavalcanti\",\"Andrade\",\"Freitas\",\"Coutinho\",\"Rezende\",\"Macedo\",\"Borges\",\"Barros\",\"Melo\",\"Barbosa\",\"Campos\",\"Lemos\",\"Braga\",\"Teixeira\",\"Dias\",\"Albuquerque\",\"Sampaio\",\"Moura\",\"Rocha\",\"Silveira\",\"Aguiar\",\"Abreu\",\"Lima\",\"Pacheco\",\"Vargas\",\"Farias\",\"Moraes\",\"Ferreira\",\"Gusmão\",\"Sousa\",\"Azevedo\",\"Dantas\",\"Cavalcante\",\"Batista\",\"Peixoto\",\"Pires\",\"Leite\",\"Ramos\",\"Macedo\",\"Sales\",\"Carneiro\",\"Monteiro\",\"Goulart\",\"Cruz\",\"Fialho\",\"Xavier\",\"Prado\",\"Valente\",\"Furtado\",\"Vieira\"];\r",
+									"    var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									"    return randomItem;\r",
+									"}\r",
+									"\r",
+									"function domain(){\r",
+									"\r",
+									"    var domain = [\"@gmail.com\",\"@hotmail.com\",\"@yahoo.com\",\"@outlook.com\",\"@aol.com\",\"@icloud.com\",\"@protonmail.com\",\"@gmx.com\",\"@mail.com\",\"@zoho.com\",\"@yandex.com\",\"@live.com\",\"@rocketmail.com\",\"@fastmail.com\",\"@tutanota.com\",\"@inbox.com\",\"@me.com\",\"@rediffmail.com\",\"@sbcglobal.net\",\"@cox.net\",\"@yahoo.co.uk\",\"@att.net\",\"@mail.ru\",\"@optonline.net\",\"@ymail.com\",\"@outlook.com.br\",\"@live.com.mx\",\"@gmx.de\",\"@web.de\",\"@yahoo.com.br\",\"@yandex.ru\",\"@hotmail.fr\",\"@hotmail.co.uk\",\"@yahoo.fr\",\"@outlook.es\",\"@mail.ru\",\"@orange.fr\",\"@libero.it\",\"@hotmail.it\",\"@yahoo.it\",\"@o2.pl\",\"@wp.pl\",\"@interia.pl\",\"@onet.pl\",\"@seznam.cz\",\"@abv.bg\",\"@gmx.at\",\"@gmx.ch\",\"@bluewin.ch\",\"@inbox.lv\",\"@rambler.ru\",\"@mail.bg\",\"@yahoo.ca\",\"@hotmail.ca\",\"@bell.net\",\"@hotmail.com.au\",\"@yahoo.com.au\",\"@t-online.de\",\"@arcor.de\",\"@cox.net\",\"@verizon.net\",\"@yahoo.de\",\"@hotmail.de\",\"@wanadoo.fr\",\"@live.fr\",\"@gmx.fr\",\"@mail.be\",\"@telenet.be\",\"@hotmail.be\",\"@yahoo.co.in\",\"@live.in\",\"@rediffmail.com\",\"@hotmail.in\",\"@indiatimes.com\",\"@yahoo.co.id\",\"@hotmail.co.id\",\"@yahoo.com.sg\",\"@outlook.sg\",\"@hotmail.com.sg\",\"@yahoo.com.ph\",\"@yahoo.com.vn\",\"@yahoo.com.ar\",\"@yahoo.com.mx\",\"@yahoo.com.co\",\"@yahoo.com.pe\",\"@yahoo.com.ve\",\"@yahoo.com.ec\",\"@yahoo.com.bo\",\"@yahoo.com.gt\",\"@yahoo.com.do\",\"@yahoo.com.pa\",\"@yahoo.com.hk\",\"@yahoo.com.tw\",\"@yahoo.com.cn\",\"@yahoo.co.jp\",\"@yahoo.co.kr\",\"@yahoo.co.th\",\"@yahoo.com.my\",\"@yahoo.com.sa\",\"@yahoo.ae\",\"@yahoo.co.il\",\"@yahoo.com.tr\",\"@yahoo.com.eg\",\"@yahoo.com.ng\",\"@yahoo.co.za\",\"@yahoo.com.au\",\"@yahoo.com.nz\",\"@yahoo.com.ph\",\"@yahoo.com.vn\"];\r",
+									"    var randomItem = domain[Math.floor(Math.random() * domain.length)];\r",
+									"\r",
+									"    return randomItem;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"FullName\", firstName() +\" \" + lastName());\r",
+									"pm.environment.set(\"Domain\", domain());\r",
+									"\r",
+									"function mail(){\r",
+									"    var user = pm.variables.get(\"FullName\").toLowerCase().replace(/\\s/g, \"\").normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")\r",
+									"    var mail = user+pm.variables.get(\"Domain\");\r",
+									"    return mail;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"Mail\", mail());\r",
+									"pm.environment.set(\"Password\", gerarSenha())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"{{FullName}}\",\n    \"mail\": \"{{Mail}}\",\n    \"password\": \"{{Password}}\",\n    \"confirmPassword\": \"{{Password}}\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Falso Positivo",
+			"item": [
+				{
+					"name": "Nome Completo Obrigatório",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"check FullName is false\", function () {",
+									"        pm.expect(pm.variables.get(\"Msg_Nome_Obrigatorio\")).to.eql(JSON.parse(responseBody).errors[0]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"\",\n    \"mail\": \"{{Mail}}1\",\n    \"password\": \"{{Password}}\",\n    \"confirmPassword\": \"{{Password}}\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Obrigatório",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"check Email is false\", function () {",
+									"        pm.expect(pm.variables.get(\"Msg_Email_Obrigatorio\")).to.eql(JSON.parse(responseBody).alert[0]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"{{FullName}}\",\n    \"mail\": \"\",\n    \"password\": \"{{Password}}\",\n    \"confirmPassword\": \"{{Password}}\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Senha Obrigatória",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"check Senha is false\", function () {",
+									"        pm.expect(pm.variables.get(\"Msg_Senha_Fora_Padrao\")).to.eql(JSON.parse(responseBody).alert[0]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"{{FullName}}\",\n    \"mail\":\"{{Mail}}\",\n    \"password\": \"\",\n    \"confirmPassword\": \"{{Password}}\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmacao Senha",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"check Confirmation Senha is false\", function () {",
+									"        pm.expect(pm.variables.get(\"Msg_Confirmacao_Senha\")).to.eql(JSON.parse(responseBody).alert[0]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"{{FullName}}\",\n    \"mail\":\"{{Mail}}\",\n    \"password\": \"{{Password}}\",\n    \"confirmPassword\": \"LorenaTestes28!\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuário Já Cadastrado",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"check Usuário Cadastrado is True\", function () {",
+									"        pm.expect(pm.variables.get(\"Msg_Usuario_Cadastrado\")).to.eql(JSON.parse(responseBody).alert[0]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"{{FullName}}\",\n    \"mail\": \"{{Mail}}\",\n    \"password\": \"{{Password}}\",\n    \"confirmPassword\": \"{{Password}}\",\n    \"accessProfile\": \"ADMIN\",\n    \"idCompany\": \"12345679009\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Limpeza Dados",
+			"item": [
+				{
+					"name": "Delete por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{Token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/logins/{{idUsuario}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"logins",
+								"{{idUsuario}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

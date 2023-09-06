@@ -4,9 +4,9 @@ name: ERP Postman Automation API Test
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    git@github.com:Qa-Coders/guardioes-automation-postman-erp-signup.git
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -34,7 +34,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Step 3 Execute collection
-        run: newman run ./AutomacaoCadastroLoginAcesso_Login.postman_collection.json -e ./CadastroLoginAcesso_Login.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup/Login - ERP" --reporter-htmlextra-title "Report Test Signup/Login - ERP" --reporter-htmlextra-export ./docs/index.html
+        run: newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup - ERP" --reporter-htmlextra-title "Report Test Signup - ERP" --reporter-htmlextra-export ./docs/index.html
 
       # Runs a set of commands using the runners shell
       - name: Step 4 Archive Production artifacts

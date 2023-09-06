@@ -1,6 +1,6 @@
 # Guardiões Automation Postman
 
-[![ERP Postman Automation API Test](https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp/actions/workflows/ci_ApiTreinPostman.yml/badge.svg)](https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp/actions/workflows/ci_ApiTreinPostman.yml)[![pages-build-deployment](https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp/actions/workflows/pages/pages-build-deployment)
+[![ERP Postman Automation API Test](https://github.com/KadarStudyDevOps/guardioes-automation-postman-erp-signup/actions/workflows/ci_ApiPostman_login.yml/badge.svg)](https://github.com/KadarStudyDevOps/guardioes-automation-postman-erp-signup/actions/workflows/ci_ApiPostman_login.yml)
 
 ### DESCRIÇÃO:
 
@@ -120,13 +120,13 @@ cd guardioes-automation-newman-nodeexpress-erp
   2.2 Para gerar o relatório do Newman execute o comando abaixo:
 
 ```sh default
-newman run ./AutomacaoCadastroLoginAcesso_Login.postman_collection.json -e ./CadastroLoginAcesso_Login.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup/Login - ERP" --reporter-htmlextra-title "Report Test Signup/Login - ERP" --reporter-htmlextra-export ./docs/index.html
+newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup - ERP" --reporter-htmlextra-title "Report Test Signup - ERP" --reporter-htmlextra-export ./docs/index.html
 ```
 
   2.3 Caso no relatório aparece erro de Certificado SSL execute o comando abaixo (acrescentando “-k” para ignorar o certificado):
 
 ```sh default
-newman run ./AutomacaoCadastroLoginAcesso_Login.postman_collection.json -e ./CadastroLoginAcesso_Login.postman_environment.json -k --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup/Login - ERP" --reporter-htmlextra-title "Report Test Signup/Login - ERP" --reporter-htmlextra-export ./docs/index.html
+newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environment.json -k --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup - ERP" --reporter-htmlextra-title "Report Test Signup - ERP" --reporter-htmlextra-export ./docs/index.html
 ```
   2.4 Para visualizar o relatório gerado navegue até a pasta "docs" criada dentro do repositório e de dois (2) cliques no arquivo index.html para ser aberto no navegador padrão.
 
