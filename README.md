@@ -16,13 +16,13 @@ Desenvolvido pela equipe Guardiões do Qa.Coders Academy, o objetivo deste proje
 
 ## Instalação do Ambiente
 
-* É necessário ter o Node JS com a versão mais recente instalada em sua máquina. Recomendamos que utilize a versão LTS (*Long-term support*) porque é a mais estável. 
+* É necessário ter o Node JS com a versão mais recente instalada em sua máquina. Recomendamos que utilize a versão LTS (*Long-term support*) por ser estável. 
 
 ### Instalação no Windows:
 
 Acesse a ** [página de download do Node.js](https://nodejs.org/en/download/).**
 
-Ao clicar na opção Windows Installer da versão LTS, será iniciado o download automático do pacote instalador;
+Ao clicar na opção Windows Installer da versão LTS, iniciará o download automático do pacote instalador;
 
 <p align="center">
   <img src="./.images/tela_site_node.png" alt="versão Download para Windows" width="45%" />
@@ -104,14 +104,14 @@ newman-reporter-htmlextra --version
 
 No Git e GitHub, realize as seguintes etapas:
 
-1. Instale e Configure a conta do Git. Para saber mais, [acesse o git](https://git-scm.com/download/win)
+1. Instale e Configure uma conta do Git. Para saber mais, [acesse o git](https://git-scm.com/download/win)
 2. Abra o terminal e clone o repositório no GitHub com os comandos abaixo:
 
 ```sh default
 git clone https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp.git
 ```
 
-  2.1 Após clonar entrar na pasta local do repositório com o comando:
+  2.1 Após clonar e entrar na pasta local do repositório com o comando:
 
 ```sh default
 cd guardioes-automation-newman-nodeexpress-erp
@@ -123,12 +123,12 @@ cd guardioes-automation-newman-nodeexpress-erp
 newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup - ERP" --reporter-htmlextra-title "Report Test Signup - ERP" --reporter-htmlextra-export ./docs/index.html
 ```
 
-  2.3 Caso no relatório aparece erro de Certificado SSL execute o comando abaixo (acrescentando “-k” para ignorar o certificado):
+  2.3 Caso no relatório apareça um erro de Certificado SSL execute o comando abaixo (acrescentando “-k” para ignorar o certificado):
 
 ```sh default
 newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environment.json -k --reporters cli, -r htmlextra --reporter-htmlextra-browserTitle "Report Test Signup - ERP" --reporter-htmlextra-title "Report Test Signup - ERP" --reporter-htmlextra-export ./docs/index.html
 ```
-  2.4 Para visualizar o relatório gerado navegue até a pasta "docs" criada dentro do repositório e de dois (2) cliques no arquivo index.html para ser aberto no navegador padrão.
+  2.4 Para visualizar o relatório gerado navegue até a pasta "docs" criada dentro do repositório e dê dois (2) cliques no arquivo index.html para ser aberto no navegador padrão.
 
 <p align="center">
   <img src="./.images/pasta_docs.png" alt="Pasta Docs" width="67%" />
@@ -142,16 +142,16 @@ newman run ./AutomacaoSignup.postman_collection.json -e ./Signup.postman_environ
   <img src="./.images/print_relatorio.png" alt="Reltório no Browser" width="50%" />
 </p>
 
-3. Configuração do pipeline de CI/CD no Git Actions, que será responsável por automatizar a execução dos testes no Postman sempre que houver alterações no repositório.
+3. A configuração do pipeline de CI/CD no Git Actions será a responsável por automatizar a execução dos testes no Postman sempre que houver alterações no repositório.
 
-​	Para verificar como é script acessem o script no caminho abaixo:
+​	Para verificar como é um script acesse o caminho abaixo:
 
 ​	[Link para o arquivo .yml](https://github.com/Qa-Coders/guardioes-automation-newman-nodeexpress-erp/blob/master/.github/workflows/ci_ApiTreinPostman.yml)
 
 ### Importar Collection e Environment no Postman:
 
 1. Crie um Workspace no Postman caso não tenha. Para mais informações, acesse o [site](https://www.softwaretestinghelp.com/postman-collections-import-export-generate-code/).
-2. Importe os dois JSON. Para mais informações, acesse o [site](https://www.softwaretestinghelp.com/postman-collections-import-export-generate-code/).
+2. Importe os dois arquivos JSON. Para mais informações, acesse o [site](https://www.softwaretestinghelp.com/postman-collections-import-export-generate-code/).
 
 ### Projeto Desenvolvido por:
 
